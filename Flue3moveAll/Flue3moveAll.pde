@@ -19,7 +19,7 @@ void draw() {
     Flue f = flueListe.get(i);
     f.tegnFlue();
     if (f.OOB(0, 0, width, height)) {
-      flueListe.remove(flueListe.get(i));
+      f.changeDir();
     } else if (f.IOB(width/2, height/2, width/2+300, height/2+300)) {
       flueListe.remove(flueListe.get(i));
     } else {
@@ -85,6 +85,13 @@ class Flue {
     float y;
     y = sin(vinkel) * dist + positionY;
     return y;
+  }
+  
+  void changeDir() {
+    positionX = getXPos(distanceFlyttet);
+    positionY = getYPos(distanceFlyttet);
+    distanceFlyttet = 1;
+    vinkel = PI - vinkel;
   }
 
   boolean OOB(int x1, int y1, int x2, int y2) {
